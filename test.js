@@ -16,6 +16,7 @@ canvas.addEventListener("mousedown",mousePressEvent);
 //window.addEventListener("key",keyEvent);
 window.addEventListener("keydown",keyPressEvent);
 window.addEventListener("keyup",keyReleaseEvent);
+window.addEventListener('contextmenu', event => event.preventDefault());
 
 drawSetFont("16px Tahoma");
 setGameSpeed(GAMESPEED);
