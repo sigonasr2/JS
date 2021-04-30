@@ -10,22 +10,25 @@ class Object {
 		this.image_angle=0;
 	}
 	stepEvent() {
-		
+		this.image_angle+=0.5;
 	}
 	drawEvent() {
 		if (!this.visible) {
 			return;
 		} else {
 			resetTransform();
-			transformRotate(this.image_angle);
 			drawSetColor("white");
 			if (typeof this.sprite!=="undefined" && this.sprite!=null) {
-				drawSpriteExt(this.x,this.y,this.sprite,this.image_xscale,this.image_yscale);
+				drawSpriteExt(this.x,this.y,this.sprite,this.image_xscale,this.image_yscale,this.image_angle);
+				//drawSpritePart(this.x,this.y,this.sprite,3,3,20,20,this.image_xscale,this.image_yscale,this.image_angle)
 			}
 			resetTransform();
 		}
 	}
 	mouseMoveEvent(e) {
+		
+	}
+	touchMoveEvent(e) {
 		
 	}
 	keyPressEvent(e) {
@@ -116,13 +119,16 @@ class DebugObj extends Object{
 		super.keyReleaseEvent(e);
 		this.lastMessage="Key Release Event: "+e.key+"";
 	}
+	touchMoveEvent(e) {
+		this.eventCount++;
+		super.touchMoveEvent(e);
+		this.lastMessage="Key Release Event: "+e.key+"";
+	}
 }
 
 class IronPlate extends Object{
 	constructor(x,y,sprite) {
 		super(sprite,true,x,y);
-		this.image_xscale=0.5;
-		this.image_yscale=0.5;
 	}
 	stepEvent() {
 		super.stepEvent();

@@ -51,12 +51,24 @@ function drawSprite(x,y,sprite) {
 	con.drawImage(sprite,x,y);
 }
 
-function drawSpriteExt(x,y,sprite,w,h) {
-	con.drawImage(sprite,x,y,w*sprite.width,h*sprite.height);
+function drawSpriteExt(x,y,sprite,w,h,image_angle) {
+	transformTranslate(x,y);
+	transformRotate(image_angle);
+	//con.globalCompositeOperation = 'multiply';
+	con.drawImage(sprite,-(w*sprite.width)/2,-(h*sprite.height)/2,w*sprite.width,h*sprite.height);
+	/*con.fillStyle = image_blend;
+	con.fillRect(0,0, w*sprite.width, h*sprite.height); 
+	con.globalCompositeOperation = 'destination-atop';
+	con.drawImage(sprite,-(w*sprite.width)/2,-(h*sprite.height)/2,w*sprite.width,h*sprite.height);
+	con.globalCompositeOperation = 'normal';*/
+	resetTransform();
 }
 
-function drawSpritePart(x,y,sprite,spritex,spritey,spritew,spriteh,w,h) {
-	con.drawImage(sprite,spritex,spritey,spritew,spriteh,x,y,w,h);
+function drawSpritePart(x,y,sprite,spritex,spritey,spritew,spriteh,w,h,image_angle) {
+	transformTranslate(x,y);
+	transformRotate(image_angle);
+	con.drawImage(sprite,spritex,spritey,spritew,spriteh,-(w*spritew)/2,-(h*spriteh)/2,spritew*w,spriteh*h);
+	resetTransform();
 }
 
 function drawText(x,y,text) {
@@ -116,4 +128,18 @@ function drawCircle(x,y,r,outline) {
 	} else {
 		con.fill();
 	}
+}
+
+function toDataURL(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      callback(reader.result);
+    }
+    reader.readAsDataURL(xhr.response);
+  };
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.send();
 }
