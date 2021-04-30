@@ -78,28 +78,30 @@ function mousePressEvent(e) {
 		"MOUSE4"
 		"MOUSE5"
 	*/
+	var pressedDown = {left:false,right:false,middle:false,mouse4:false,mouse5:false}
 	mouseDown.splice(0,mouseDown.length);
 	var buttonamt = e.buttons;
-	if (buttonamt>=16) {buttonamt-=16;mouseDown.push("MOUSE5");}
-	if (buttonamt>=8) {buttonamt-=8;mouseDown.push("MOUSE4");}
-	if (buttonamt>=4) {buttonamt-=4;mouseDown.push("MIDDLE");}
-	if (buttonamt>=2) {buttonamt-=2;mouseDown.push("RIGHT");}
-	if (buttonamt>=1) {buttonamt-=1;mouseDown.push("LEFT");}
+	if (buttonamt>=16) {buttonamt-=16;pressedDown.mouse5=true;mouseDown.push("MOUSE5");}
+	if (buttonamt>=8) {buttonamt-=8;pressedDown.mouse4=true;mouseDown.push("MOUSE4");}
+	if (buttonamt>=4) {buttonamt-=4;pressedDown.middle=true;mouseDown.push("MIDDLE");}
+	if (buttonamt>=2) {buttonamt-=2;pressedDown.right=true;mouseDown.push("RIGHT");}
+	if (buttonamt>=1) {buttonamt-=1;pressedDown.left=true;mouseDown.push("LEFT");}
 	for (i=0;i<gameObjs.length;i++) {
-		gameObjs[i].mousePressEvent(e);
+		gameObjs[i].mousePressEvent(e,pressedDown);
 	}
 }
 
 function mouseReleaseEvent(e) {
+	var pressedDown = {left:false,right:false,middle:false,mouse4:false,mouse5:false}
 	mouseDown.splice(0,mouseDown.length);
 	var buttonamt = e.buttons;
-	if (buttonamt>=16) {buttonamt-=16;mouseDown.push("MOUSE5");}
-	if (buttonamt>=8) {buttonamt-=8;mouseDown.push("MOUSE4");}
-	if (buttonamt>=4) {buttonamt-=4;mouseDown.push("MIDDLE");}
-	if (buttonamt>=2) {buttonamt-=2;mouseDown.push("RIGHT");}
-	if (buttonamt>=1) {buttonamt-=1;mouseDown.push("LEFT");}
+	if (buttonamt>=16) {buttonamt-=16;pressedDown.mouse5=true;mouseDown.push("MOUSE5");}
+	if (buttonamt>=8) {buttonamt-=8;pressedDown.mouse4=true;mouseDown.push("MOUSE4");}
+	if (buttonamt>=4) {buttonamt-=4;pressedDown.middle=true;mouseDown.push("MIDDLE");}
+	if (buttonamt>=2) {buttonamt-=2;pressedDown.right=true;mouseDown.push("RIGHT");}
+	if (buttonamt>=1) {buttonamt-=1;pressedDown.left=true;mouseDown.push("LEFT");}
 	for (i=0;i<gameObjs.length;i++) {
-		gameObjs[i].mouseReleaseEvent(e);
+		gameObjs[i].mouseReleaseEvent(e,pressedDown);
 	}
 }
 

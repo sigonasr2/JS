@@ -37,10 +37,10 @@ class Object {
 	keyReleaseEvent(e) {
 		
 	}
-	mousePressEvent(e) {
+	mousePressEvent(e,pressed) {
 		
 	}
-	mouseReleaseEvent(e) {
+	mouseReleaseEvent(e,pressed) {
 		
 	}
 	mouseEvent(e) {
@@ -99,15 +99,15 @@ class DebugObj extends Object{
 		this.storedMouseY=e.offsetY;
 		//this.messages.push(this.lastMessage);
 	}
-	mousePressEvent(e) {
+	mousePressEvent(e,pressed) {
 		this.eventCount++;
-		super.mousePressEvent(e);
-		this.lastMessage="Mouse Press Event";
+		super.mousePressEvent(e,pressed);
+		this.lastMessage="Mouse Press Event: "+JSON.stringify(pressed);
 	}
-	mouseReleaseEvent(e) {
+	mouseReleaseEvent(e,pressed) {
 		this.eventCount++;
-		super.mouseReleaseEvent(e);
-		this.lastMessage="Mouse Release Event";
+		super.mouseReleaseEvent(e,pressed);
+		this.lastMessage="Mouse Release Event: "+JSON.stringify(pressed);
 	}
 	keyPressEvent(e) {
 		this.eventCount++;
